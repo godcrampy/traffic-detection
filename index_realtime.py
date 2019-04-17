@@ -1,16 +1,8 @@
 
 """Imports"""
-from collections import defaultdict
-from io import StringIO
-from matplotlib import pyplot as plt
-from PIL import Image
 import numpy as np
 import os
-import six.moves.urllib as urllib
-import sys
-import tarfile
 import tensorflow as tf
-import zipfile
 import requests
 import cv2
 
@@ -38,7 +30,7 @@ with detection_graph.as_default():
   with tf.Session(graph=detection_graph) as sess:
    ret = True
    while (ret):
-      #ret,image_np = cap.read()
+      # Get the image
       img_res = requests.get("http://192.168.137.168:8080/shot.jpg")
       img_arr = np.array(bytearray(img_res.content), dtype = np.uint8)
       image_np = cv2.imdecode(img_arr,-1)
