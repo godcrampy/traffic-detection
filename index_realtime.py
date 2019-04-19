@@ -31,7 +31,7 @@ with detection_graph.as_default():
    ret = True
    while (ret):
       # Get the image
-      img_res = requests.get("http://192.168.137.168:8080/shot.jpg")
+      img_res = requests.get("http://192.168.2.4:8080/shot.jpg")
       img_arr = np.array(bytearray(img_res.content), dtype = np.uint8)
       image_np = cv2.imdecode(img_arr,-1)
       # Expand dimensions since the model expects images to have shape: [1, None, None, 3]
@@ -51,7 +51,7 @@ with detection_graph.as_default():
       
      
       # Visualization of the results of a detection.
-      vis_util.visualize_boxes_and_labels_on_image_array(
+      image_np = vis_util.visualize_boxes_and_labels_on_image_array(
           image_np,
           np.squeeze(boxes),
           np.squeeze(classes).astype(np.int32),
@@ -59,8 +59,8 @@ with detection_graph.as_default():
           category_index,
           use_normalized_coordinates=True,
          line_thickness=8)
-#      plt.figure(figsize=IMAGE_SIZE)
-#      plt.imshow(image_np)
+      
+
       cv2.imshow('image',cv2.resize(image_np,(1280,960)))
       if cv2.waitKey(25) & 0xFF == ord('q'):
           cv2.destroyAllWindows()
