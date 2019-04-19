@@ -10,6 +10,7 @@ from PIL import Image, ImageDraw
 from utils import label_map_util
 from custom_utils import visualization_utils as vis_util
 
+count = 0
 boxes_temp = 0
 classes_temp = 0
 
@@ -39,6 +40,8 @@ with detection_graph.as_default():
       # Get the image
       ret, image_np = cap.read()
       image_np = image_np[200:359, 75:639]
+      im_width = 564
+      im_height = 159
       
       key = cv2.waitKey(1) & 0xff
       # Expand dimensions since the model expects images to have shape: [1, None, None, 3]
@@ -68,6 +71,10 @@ with detection_graph.as_default():
       draw = ImageDraw.Draw(img_pil)
       draw.line([0, 100, 564, 100], fill = (255,0,0), width = 2)
       image_np = np.array(img_pil)
+      
+      # Counting vehicles passed
+      for i in range(100):
+          ymin = boxes[]
       
       # Visualization of the results of a detection.
       image_np = vis_util.visualize_boxes_and_labels_on_image_array(
